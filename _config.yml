@@ -1,1 +1,12 @@
 theme: jekyll-theme-minimal
+title: Ioana Popescu
+description: MSc Student at ETH Zurich
+
+# This tells the theme which links to show in the sidebar
+navbar:
+  - title: Home
+    url: /index.html
+  - title: Projects
+    url: /projects.html
+  - title: Education
+    url: /education.html
