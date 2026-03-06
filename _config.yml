@@ -2,11 +2,18 @@ theme: jekyll-theme-minimal
 title: Ioana Popescu
 description: MSc Student at ETH Zurich
 
-# This tells the theme which links to show in the sidebar
+logo: /img/20260306_221454.jpg
+
 navbar:
   - title: Home
     url: /index.html
+  - title: Research
+    url: /research.html
   - title: Projects
     url: /projects.html
+  - title: Experience
+    url: /experience.html
   - title: Education
     url: /education.html
+  - title: Awards
+    url: /awards.html

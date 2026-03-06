@@ -9,8 +9,10 @@ title: Home
 
 # A bit about me
 
-I'm a first-year master's student in Data Science at ETH Zurich, interested in optimization, probability, statistics and recently genomics. Before that, I studied Math & CS at Ecole Polytechnique in Paris. 
+I am a first-year Master’s student in Data Science at ETH Zurich. My interests lie broadly in optimization, probability, and statistics, with a recent focus on applications to genomics. Before that, I completed a dual degree in Mathematics and Computer Science at École Polytechnique in Paris.
 
-I interned as a Software Engineer at Microsoft and I will intern as a Quant Researcher at Optiver this summer. DId research at University of Cambridge in statistical guarantees for transformers, at ENS Ulm in preferential attachment trees, and now in difussion models for genomics tissue reconstruction at ETH Zurich. 
+I have previously interned as a Software Engineer at Microsoft, and I will be joining Optiver this summer as a Quantitative Research Intern. I have also been involved in several research projects: at the University of Cambridge working on statistical guarantees for transformers, at ENS Ulm on preferential attachment trees, and currently at ETH Zurich on diffusion models for genomics tissue reconstruction.
 
-Still figuring out what the next steps are. 
+I am still exploring my plans for next year, and I am considering both PhD programs—particularly in mathematics or machine learning for genomics—and opportunities in industry.
+
+Outside of academics, I enjoy reading french literature, playing video games, cooking, and practicing pilates.

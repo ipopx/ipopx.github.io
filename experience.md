@@ -10,25 +10,26 @@ title: Experience
 ## Experience
 
 ### Optiver
-**Quantitative Research Intern** | [cite_start]**Jul 2026 – Sep 2026** [cite: 34, 35, 37]
+**Quantitative Research Intern** | **Jul 2026 – Sep 2026** 
 
 ### Microsoft
-**Software Engineer Intern** | [cite_start]**Jul 2024 – Sep 2024** [cite: 41, 42, 43]
-* [cite_start]Improved design of the Office products checkout website (React, TypeScript, CSS). [cite: 44]
-* [cite_start]Ran an A/B test adding tooltips to Microsoft products, deployed to millions of users to enhance UX [cite: 45]
+**Software Engineer Intern** | **Jul 2024 – Sep 2024** 
+* Improved the frontend design of the Office checkout website (React, TypeScript, CSS)
+* Ran an A/B test adding tooltips to Microsoft product icons, deployed to millions of users to enhance UX
 
 ### Tenaris
-**Data Science Intern** | [cite_start]**Jun 2023 – Jul 2023** [cite: 46, 47, 48]
-* [cite_start]Built a CNN to monitor steel pipe piercing, balancing execution time and recall in Python. [cite: 49]
-* [cite_start]Applied data augmentation, hyperparameter tuning (Weights & Biases) and visualization techniques (heatmaps). [cite: 50]
-* [cite_start]Evaluated sliding window, one-shot, and YOLO approaches; [cite: 50]
-* [cite_start]deployed the best-performing model as a web service [cite: 51]
+**Data Science Intern** | **Jun 2023 – Jul 2023** 
+* Developed a CNN-based computer vision system in Python to monitor steel pipe piercing, classifying piercer misalignment and localizing the piercing head
+* Improved model performance on an imbalanced image dataset using data augmentation, hyperparameter tuning (Weights & Biases), and interpretability techniques (heatmaps)
+* Evaluated multiple detection strategies, including sliding window, one-shot detection, and YOLO architectures
+* Deployed the best-performing model as a web service, optimizing the trade-off between inference time and recall
 
 ### Maths Beyond Limits (Balkans)
-**Tutor** | [cite_start]**Mar 2024** [cite: 53, 54, 56]
-* [cite_start]Taught a 3-lesson course on Randomized Algorithms at a camp for gifted high school students [cite: 55]
+**Tutor** | **Mar 2024** 
+* Taught a 3-lesson course on Randomized Algorithms and their application to problems like 3-SAT, Min-Cut, caching or finding independent sets at a math camp for olympic high school students
 
 ### European Girls' Mathematical Olympiad (EGMO)
-**Coordinator** | [cite_start]**Apr 2023** [cite: 57, 58, 61]
-* [cite_start]Helped develop marking scheme, graded 80+ contestant papers under Prof. Geoff Smith [cite: 59]
-* [cite_start]Held coordination sessions with international team leaders [cite: 59]
+**Coordinator** | **Apr 2023** 
+* Helped develop the marking scheme and official solutions for a geometry problem
+* Graded 80+ contestant papers
+* Held coordination sessions with international team leaders, discussing students' solutions and grading

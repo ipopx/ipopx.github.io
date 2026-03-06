@@ -10,17 +10,19 @@ title: Projects
 ## Coding projects
 
 ### Parallel DNA Sequence Alignment
-[cite_start]**Mar 2025 – Jun 2025** [cite: 64, 65]
-* [cite_start]Developed parallel C++/CUDA implementations for DNA sequence alignment by filling a DP matrix of similarity scores, achieving 10x-40x speed-up [cite: 64]
+**Mar 2025 – Jun 2025** 
+* Developed parallel C++ and CUDA implementations for DNA sequence alignment by filling a DP matrix of similarity scores, and benchmarked speed-up performance 
+* Code: [https://github.com/ThisIsErik/CSE305Project](https://github.com/ThisIsErik/CSE305Project) 
 
 ### Sentiment Analysis on Movie Reviews
-[cite_start]**Mar 2024 – Jun 2024** [cite: 73, 74]
-* [cite_start]Implemented and benchmarked NLP models (Bag of Words, Random Forests on GloVe embeddings, LSTM, BERT) in Python [cite: 73, 75]
+**Mar 2024 – Jun 2024** 
+* Benchmarked NLP models (Bag of Words, Random Forests on GloVe embeddings, LSTM, BERT) in Python on an IMDB movie reviews dataset from Kaggle
+* Code: [https://github.com/NDobricic/imdb-sentiment-analysis](https://github.com/NDobricic/imdb-sentiment-analysis)
 
 ### Evolution Simulator
-[cite_start]**Nov 2023 – Jan 2024** [cite: 76, 77]
-* [cite_start]Team project in C++ on autonomous learning creatures using the NEAT algorithm, inspired by "Bibites," analyzing natural selection [cite: 78]
+**Nov 2023 – Jan 2024** 
+* Developed a biological simulation of autonomous "creatures" using C++ and the NEAT (NeuroEvolution of Augmenting Topologies) algorithm to evolve neural networks
+* Engineered sensory-driven decision making, allowing entities to process environmental inputs and execute actions based on evolved behavioral patterns, inspired by "The Bibites"
+* Demonstrated emergent complexity by analyzing how iterative random mutations, filtered through survival-of-the-fittest pressures, result in specialized traits and efficient survival strategies
+* Code: [https://github.com/EvolutionSimulator/EvolutionSimulator](https://github.com/EvolutionSimulator/EvolutionSimulator)
 
-### Hackathon: QuantumBlack's X
-[cite_start]**Nov 2023** [cite: 79, 80]
-* [cite_start] Built ML model to detect methane leaks from satellite images with 90% accuracy; added heatmap visualization [cite: 81]

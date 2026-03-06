@@ -13,7 +13,9 @@ title: Education
 **Master in Data Science** | **Sep 2025 – Jun 2027 (expected)**
 * Teaching Assistant for Probabilistic AI (Fall 25')
 * Current GPA: 6.0/6.0
-* ESOP Excellence Scholarship – ETH Foundation, Sep 2025
+* ESOP Excellence Scholarship – ETH Foundation, Sep 2025 
+
+Coursework: Big Data, Mathematics of Data Science, Fundamentals of Mathematical Statistics, Machine Learning for Genomics, Advanced Machine Learning
 
 ### École Polytechnique
 **Bachelor in Mathematics and Computer Science** | **Sep 2022 – Jun 2025**
@@ -22,6 +24,10 @@ title: Education
 * L'X Foundation Excellence Scholarship, Sep 2022
 * Cumulative GPA: 4.29/4.3
 * Valedictorian
+
+Coursework: Linear Algebra & Optimization, Analysis (Vector & Fourier, Calculus, Topology), Measure Theory, Programming in Python and C++, Algorithms, Probability & Statistics, Intro to Machine Learning, Computer Architecture, Concurrent & Distributed Computing, Differential Geometry, Research Project in Random Matrix Theory, Mechanics & Thermodynamics, Intro to Economics and Behavioral Economics
+
+Coursework during exchange (ETH): Probabilistic AI, Linear & Combinatorial Optimization, Complex Analysis, Probability Theory
 
 ### European School of Bucharest
 **High School Diploma** | **Sep 2018 – Jun 2022**
