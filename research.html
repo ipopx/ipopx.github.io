@@ -549,6 +549,36 @@
     }
     .see-all:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 2px; }
 
+    /* ── Research figures ── */
+    .research-figure {
+      margin: 0.9rem 0 0.25rem;
+      padding: 0.75rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .research-figure img,
+    .research-figure video {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+    }
+    .research-figure figcaption {
+      margin-top: 0.65rem;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 72ch;
+    }
+    :root[data-theme="dark"] .research-figure {
+      background: #f4efe6;
+      border-color: #352f28;
+    }
+    :root[data-theme="dark"] .research-figure figcaption {
+      color: #5a544a;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 600px) {
       .nav-inner { padding: 0 0.85rem; gap: 0.4rem; }
@@ -620,6 +650,10 @@
           <ul class="item-desc" role="list">
             <li>Showed that a pretrained transformer with a small number of parameters and pretraining sequences is minimax-optimal for in-context learning regression problems.</li>
           </ul>
+          <figure class="research-figure">
+            <img src="img/research/icml-risk.png" alt="Risk curves comparing the local polynomial estimator, a transformer with hand-crafted weights, and a pretrained transformer" width="968" height="578" loading="lazy">
+            <figcaption>Risk decomposition over the function class: local polynomial estimator, hand-crafted transformer weights, and the pretrained transformer.</figcaption>
+          </figure>
         </li>
         <li class="pub-item">
           <div class="pub-title">Reconstruction of 3D Spatial Transcriptomics Volumes</div>
@@ -630,6 +664,10 @@
           <ul class="item-desc" role="list">
             <li>Developed a generative model based on unbalanced optimal transport and thin-plate splines to reconstruct missing slices in 3D spatial transcriptomics volumes, and evaluated it against interpolation-based and flow-matching baselines.</li>
           </ul>
+          <figure class="research-figure">
+            <img src="img/research/transcriptomics-slices.png" alt="Comparison of true MERFISH brain slice against Baryinterpol, SpatialZ, and DeepSpatial reconstructions" width="1024" height="275" loading="lazy">
+            <figcaption>Held-out MERFISH slice reconstruction: true slice (left), our method (Baryinterpol), SpatialZ, and DeepSpatial.</figcaption>
+          </figure>
         </li>
         <li class="pub-item">
           <div class="pub-title">Energy of Superlinear Preferential Attachment Trees</div>
@@ -645,6 +683,10 @@
             <li>Analyzed the asymptotic energy of superlinear preferential attachment trees; extended known results for linear and sublinear models by characterizing distinct asymptotic energy regimes.</li>
             <li>Special mention from the jury of the Junior Maryam Mirzakhani Prize 2025.</li>
           </ul>
+          <figure class="research-figure">
+            <img src="img/research/pa-trees.png" alt="Side-by-side visualizations of superlinear and sublinear preferential attachment trees" width="1024" height="436" loading="lazy">
+            <figcaption>Preferential attachment trees: superlinear (left), with dominant hubs, versus sublinear (right), with a more uniform branching structure.</figcaption>
+          </figure>
         </li>
         <li class="pub-item">
           <div class="pub-title">Weingarten Calculus</div>
@@ -712,6 +754,12 @@
           <ul class="item-desc" role="list">
             <li>Biological simulation of autonomous creatures in C++ using NEAT to evolve neural networks under survival pressure.</li>
           </ul>
+          <figure class="research-figure">
+            <video controls playsinline preload="metadata" aria-label="Evolution simulator clip: an evolved carnivore catches a less adapted creature">
+              <source src="img/research/evolution-simulator.mp4" type="video/mp4">
+            </video>
+            <figcaption>Survival of the fittest in the simulator: an evolved carnivore catches a less adapted creature.</figcaption>
+          </figure>
         </li>
       </ol>
     </section>
