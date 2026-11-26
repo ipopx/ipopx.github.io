@@ -458,3 +458,13 @@ details.more p { margin-top: 0.45rem; color: var(--text-muted); line-height: 1.6
   *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* Nested sub-entry inside a card (e.g. exchange semester) */
+.sub-item {
+  margin-top: 0.7rem; padding: 0.45rem 0 0.45rem 0.75rem;
+  border-left: 2px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+.sub-item-title { font-size: 0.86rem; font-weight: 500; color: var(--text); line-height: 1.45; }
+.sub-item-org { font-weight: 400; color: var(--text-muted); }
+.card-meta--sm { margin-top: 0.35rem; gap: 0.35rem 0.45rem; }
+.pill--sm { font-size: 0.7rem; padding: 0.06rem 0.5rem; }
