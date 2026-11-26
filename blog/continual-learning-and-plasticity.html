@@ -51,9 +51,7 @@
         <h1 id="post-title">Continual learning &amp; plasticity</h1>
         <p class="post-meta"><time datetime="2026-11-26">26 November 2026</time> · Ioana Popescu</p>
         <ul class="post-tags" role="list" aria-label="Tags">
-          <li><a class="tag" href="../blog.html?tag=Continual%20learning">Continual learning</a></li>
           <li><a class="tag" href="../blog.html?tag=LLMs">LLMs</a></li>
-          <li><a class="tag" href="../blog.html?tag=Machine%20learning">Machine learning</a></li>
         </ul>
       </header>
 
@@ -70,11 +68,114 @@
           <li><strong>Continual fine-tuning</strong> improves the response to specific user commands, via supervised fine-tuning on instruction-output pairs. It improves the model’s ability to solve new tasks, tackle new domains or new tools (e.g. search engines and databases)</li>
           <li><strong>Continual alignment</strong> ensures the outputs adhere to ethical standards, usually via RLHF. It tries to make models follow ethical guidelines and better reflect human preferences</li>
         </ul>
+        <figure class="diagram" aria-labelledby="fig-stages-cap">
+          <svg viewBox="0 0 680 186" role="img" aria-label="Pipeline: a base LLM is updated by continual pretraining on new unlabeled text, then continual fine-tuning on instruction pairs, then continual alignment on human preferences; the three continual stages repeat as new data arrives.">
+            <defs>
+              <marker id="arrow-stages" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path class="d-fill-muted" d="M0 0 L10 5 L0 10 z"/>
+              </marker>
+            </defs>
+            <path class="d-stroke-accent d-dashed" fill="none" d="M182 34 V24 H674 V34"/>
+            <text class="d-label d-accent" x="428" y="16" text-anchor="middle">repeated as new data arrives</text>
+
+            <rect class="d-box" x="6" y="44" width="146" height="60" rx="6"/>
+            <text class="d-title" x="79" y="79" text-anchor="middle">Base LLM</text>
+
+            <rect class="d-box-accent" x="182" y="44" width="146" height="60" rx="6"/>
+            <text class="d-title" x="255" y="70" text-anchor="middle">Continual</text>
+            <text class="d-title" x="255" y="89" text-anchor="middle">pretraining</text>
+
+            <rect class="d-box-accent" x="355" y="44" width="146" height="60" rx="6"/>
+            <text class="d-title" x="428" y="70" text-anchor="middle">Continual</text>
+            <text class="d-title" x="428" y="89" text-anchor="middle">fine-tuning</text>
+
+            <rect class="d-box-accent" x="528" y="44" width="146" height="60" rx="6"/>
+            <text class="d-title" x="601" y="70" text-anchor="middle">Continual</text>
+            <text class="d-title" x="601" y="89" text-anchor="middle">alignment</text>
+
+            <line class="d-stroke-muted" x1="154" y1="74" x2="178" y2="74" marker-end="url(#arrow-stages)"/>
+            <line class="d-stroke-muted" x1="330" y1="74" x2="351" y2="74" marker-end="url(#arrow-stages)"/>
+            <line class="d-stroke-muted" x1="503" y1="74" x2="524" y2="74" marker-end="url(#arrow-stages)"/>
+
+            <text class="d-label d-accent d-strong" x="79" y="128" text-anchor="middle">trained once</text>
+            <text class="d-label" x="79" y="149" text-anchor="middle">large static</text>
+            <text class="d-label" x="79" y="167" text-anchor="middle">text corpus</text>
+
+            <text class="d-label d-accent d-strong" x="255" y="128" text-anchor="middle">self-supervised</text>
+            <text class="d-label" x="255" y="149" text-anchor="middle">new unlabeled text</text>
+            <text class="d-label" x="255" y="167" text-anchor="middle">facts, domains, languages</text>
+
+            <text class="d-label d-accent d-strong" x="428" y="128" text-anchor="middle">supervised fine-tuning</text>
+            <text class="d-label" x="428" y="149" text-anchor="middle">instruction–output pairs</text>
+            <text class="d-label" x="428" y="167" text-anchor="middle">tasks, domains, tools</text>
+
+            <text class="d-label d-accent d-strong" x="601" y="128" text-anchor="middle">RLHF</text>
+            <text class="d-label" x="601" y="149" text-anchor="middle">human preferences</text>
+            <text class="d-label" x="601" y="167" text-anchor="middle">values &amp; ethics</text>
+          </svg>
+          <figcaption id="fig-stages-cap">The three stages where continual learning happens in LLMs, following Wu et al. (2024).</figcaption>
+        </figure>
+
         <p>Shi et al. (2025) also distinguish two directions of continual learning. <strong>Vertical continual learning</strong> goes from general to specific: a general-purpose model is adapted step by step to a domain (e.g. medicine), and then to particular tasks within it, ideally without losing its general abilities. <strong>Horizontal continual learning</strong> keeps the same model up to date across time and domains, as new data arrives and the world changes. Each direction comes with its own kind of forgetting: in vertical CL, the model risks losing general knowledge as it specializes; in horizontal CL, it risks losing what it learned earlier as it adapts to new data.</p>
 
         <h2>What are the challenges?</h2>
         <p>The major challenge continual learning encounters is that of <strong>catastrophic forgetting</strong> (Luo et al., 2023): when the performance of a model on old tasks significantly diminishes when trained with new data.</p>
+        <figure class="diagram" aria-labelledby="fig-forget-cap">
+          <svg viewBox="0 0 680 270" role="img" aria-label="Illustrative chart of accuracy on task A while a model trains on tasks A, B and C in sequence. With naive fine-tuning, accuracy on A drops sharply once training on B starts: catastrophic forgetting. With replay, accuracy on A stays close to its peak.">
+            <defs>
+              <marker id="arrow-forget" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path class="d-fill-muted" d="M0 0 L10 5 L0 10 z"/>
+              </marker>
+            </defs>
+            <rect class="d-band" x="60" y="20" width="200" height="190"/>
+            <rect class="d-band" x="460" y="20" width="200" height="190"/>
+            <line class="d-axis" x1="60" y1="20" x2="60" y2="210"/>
+            <line class="d-axis" x1="60" y1="210" x2="660" y2="210"/>
+            <line class="d-grid" x1="60" y1="50" x2="660" y2="50"/>
+
+            <text class="d-label" x="160" y="232" text-anchor="middle">train on task A</text>
+            <text class="d-label" x="360" y="232" text-anchor="middle">train on task B</text>
+            <text class="d-label" x="560" y="232" text-anchor="middle">train on task C</text>
+            <text class="d-label" x="360" y="258" text-anchor="middle">training time →</text>
+            <text class="d-label" x="52" y="54" text-anchor="end">high</text>
+            <text class="d-label" x="52" y="208" text-anchor="end">low</text>
+            <text class="d-label" transform="translate(22 130) rotate(-90)" text-anchor="middle">accuracy on task A</text>
+
+            <path class="d-line-muted" d="M60 195 C 110 90, 170 55, 260 50 C 285 52, 300 120, 345 133 S 440 141, 460 143 C 485 150, 505 168, 560 172 S 640 177, 660 178"/>
+            <path class="d-line-accent" d="M60 195 C 110 90, 170 55, 260 50 C 300 52, 360 59, 460 62 C 500 64, 560 69, 660 72"/>
+
+            <text class="d-label d-accent d-strong" x="652" y="62" text-anchor="end">with replay</text>
+            <text class="d-label d-strong" x="652" y="196" text-anchor="end">naive fine-tuning</text>
+
+            <text class="d-label" x="360" y="104" text-anchor="middle">catastrophic</text>
+            <text class="d-label" x="360" y="121" text-anchor="middle">forgetting</text>
+            <line class="d-stroke-muted" x1="322" y1="100" x2="299" y2="88" marker-end="url(#arrow-forget)"/>
+          </svg>
+          <figcaption id="fig-forget-cap">Illustrative: as a model trains on new tasks, its accuracy on an earlier task can collapse. Replaying a small amount of old data keeps most of it.</figcaption>
+        </figure>
+
         <p>There are some ways people have tried to mitigate it:</p>
+        <figure class="method-grid-figure" aria-label="The four families of methods against catastrophic forgetting">
+          <ul class="method-grid" role="list">
+            <li class="method-card">
+              <svg class="method-icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="9" width="14" height="17" rx="2"/><path d="M9 9V6h14v17h-4"/><path d="M27 12a6 6 0 0 1-3 7.5"/><path d="M26.5 16.5l-2.5 3 -3-1.5"/></svg>
+              <div><p class="method-name">Replay</p><p class="method-desc">Rehearse old examples, stored or generated</p></div>
+            </li>
+            <li class="method-card">
+              <svg class="method-icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="14" width="18" height="13" rx="2"/><path d="M11 14v-4a5 5 0 0 1 10 0v4"/><circle cx="16" cy="20.5" r="1.6"/></svg>
+              <div><p class="method-name">Regularization</p><p class="method-desc">Penalize changes to important weights</p></div>
+            </li>
+            <li class="method-card">
+              <svg class="method-icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="17" width="24" height="10" rx="2"/><rect x="5" y="6" width="6" height="7" rx="1.5"/><rect x="13" y="6" width="6" height="7" rx="1.5"/><rect x="21" y="6" width="6" height="7" rx="1.5" stroke-dasharray="2 2"/><path d="M8 13v4M16 13v4"/></svg>
+              <div><p class="method-name">Dynamic architecture</p><p class="method-desc">Add task-specific modules or subspaces</p></div>
+            </li>
+            <li class="method-card">
+              <svg class="method-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 6h24l-9 11v8l-6 3V17z"/></svg>
+              <div><p class="method-name">Data selection</p><p class="method-desc">Choose what to train on and what to replay</p></div>
+            </li>
+          </ul>
+        </figure>
+
         <ol>
           <li><strong>Experience replay methods:</strong> replaying examples from previous tasks during training to retain old knowledge
             <ul>
