@@ -275,7 +275,7 @@ a.nav-name:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px
 .card-title { font-size: 0.98rem; font-weight: 600; line-height: 1.45; color: var(--text); }
 .card-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.1rem; }
 .card-authors { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.55; }
-.card-authors .me { font-weight: 600; color: var(--text); }
+.card-affil { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.1rem; line-height: 1.55; }
 .card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.6rem; margin-top: 0.55rem; font-size: 0.8rem; }
 .card-link {
   color: var(--accent); text-decoration: none; font-weight: 500;
