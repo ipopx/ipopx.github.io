@@ -60,7 +60,7 @@
         <h2>What is continual learning?</h2>
         <p>How are LLMs continuously updated and improved without frequently retraining from scratch? The answer is: continual learning. Continual learning is a methodology that aims to keep LLMs up to date and help them acquire new knowledge and skills by sequentially integrating new data, inspired by the incremental learning in human brains.</p>
         <figure class="diagram" aria-labelledby="fig-parallel-cap">
-          <svg viewBox="0 0 680 255" role="img" aria-label="A human brain and an LLM, the LLM inspired by the brain, share one timeline: first news is learned, then medicine is added on top, then Rust, each time keeping what was learned before.">
+          <svg viewBox="0 0 680 255" role="img" aria-label="A human brain and an LLM, the LLM inspired by the brain, share one timeline: learning from news articles, medical papers and Rust code in turn, first news is learned, then medicine is added on top, then Rust, each time keeping what was learned before.">
             <defs>
               <marker id="arrow-parallel" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                 <path class="d-fill-muted" d="M0 0 L10 5 L0 10 z"/>
@@ -79,6 +79,14 @@
             <circle class="d-accent" cx="46" cy="197" r="2.6"/><circle class="d-accent" cx="46" cy="205" r="2.6"/><circle class="d-accent" cx="46" cy="213" r="2.6"/>
             <circle class="d-accent" cx="64" cy="197" r="2.6"/><circle class="d-accent" cx="64" cy="205" r="2.6"/><circle class="d-accent" cx="64" cy="213" r="2.6"/>
             <text class="d-title" x="55" y="244" text-anchor="middle">LLM</text>
+
+            <!-- incoming data -->
+            <text class="d-label" x="225" y="80" text-anchor="middle">news articles</text>
+            <line class="d-stroke-muted" x1="225" y1="86" x2="225" y2="103" marker-end="url(#arrow-parallel)"/>
+            <text class="d-label" x="405" y="80" text-anchor="middle">medical papers</text>
+            <line class="d-stroke-muted" x1="405" y1="86" x2="405" y2="103" marker-end="url(#arrow-parallel)"/>
+            <text class="d-label" x="585" y="80" text-anchor="middle">Rust code</text>
+            <line class="d-stroke-muted" x1="585" y1="86" x2="585" y2="103" marker-end="url(#arrow-parallel)"/>
 
             <!-- one shared stack: new knowledge (highlighted) piles on top of what is kept -->
             <rect class="d-box" x="150" y="106" width="150" height="76" rx="6"/>
@@ -302,8 +310,8 @@
             <text class="d-label" x="580" y="116" text-anchor="middle">task 5</text>
 
             <!-- FWT: ahead to new tasks -->
-            <path class="d-stroke-muted d-dashed" fill="none" d="M350 134 Q403 172 452 136" marker-end="url(#arrow-fwt)"/>
-            <path class="d-stroke-muted d-dashed" fill="none" d="M358 134 Q470 204 576 136" marker-end="url(#arrow-fwt)"/>
+            <path class="d-stroke-muted" fill="none" d="M350 134 Q403 172 452 136" marker-end="url(#arrow-fwt)"/>
+            <path class="d-stroke-muted" fill="none" d="M358 134 Q470 204 576 136" marker-end="url(#arrow-fwt)"/>
             <text class="d-label d-strong" x="640" y="190" text-anchor="end">Forward transfer (FWT)</text>
             <text class="d-label" x="640" y="207" text-anchor="end">effect on new, unseen tasks</text>
           </svg>
