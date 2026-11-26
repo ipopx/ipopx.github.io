@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Continual learning &amp; plasticity — Ioana Popescu</title>
+  <meta name="description" content="An introduction to continual learning for large language models: what it is, how catastrophic forgetting is mitigated, loss of plasticity, and whether it works.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../blog/blog.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav id="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a class="nav-name" href="../index.html">Ioana Popescu</a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#news">News</a></li>
+        <li><a href="../research.html">Research &amp; Projects</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../education.html">Education</a></li>
+        <li><a href="../awards.html">Awards</a></li>
+        <li><a href="../blog.html" class="active">Blog</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Toggle dark mode">
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content" tabindex="-1">
+    <article class="page-section" aria-labelledby="post-title">
+      <a class="back-link" href="../blog.html">← All posts</a>
+      <header class="post-header">
+        <h1 id="post-title">Continual learning &amp; plasticity</h1>
+        <p class="post-meta"><time datetime="2026-11-26">26 November 2026</time> · Ioana Popescu</p>
+      </header>
+
+      <div class="post-body">
+        <h2>What is continual learning?</h2>
+        <p>How are LLMs continuously updated and improved without frequently retraining from scratch? The answer is: continual learning. Continual learning is a methodology that aims to keep LLMs up to date and help them acquire new knowledge and skills by sequentially integrating new data, inspired by the incremental learning in human brains.</p>
+        <p>Unlike RAG, which adds knowledge at inference time without changing the model, or model editing, which targets individual facts, continual learning tries to improve model performance across tasks, across domains and across languages.</p>
+
+        <h2>What does it entail?</h2>
+        <p>Continual learning really asks: how can models learn from non-stationary data streams while continuously accumulating, updating, and exploiting knowledge over time?</p>
+        <p>Continual learning in LLMs can occur at different stages (Wu et al., 2024):</p>
+        <ul>
+          <li><strong>Continual pretraining</strong> improves the model’s fundamental understanding of language and different domains, updating the weights via a self-supervised training objective, on new unlabeled data. It includes updating facts (via news feeds, social media or academic articles), updating domain knowledge (e.g. to the finance domain or medical domain) and expanding language (e.g. to new slang, and programming languages), which allows the model to stay current with new developments</li>
+          <li><strong>Continual fine-tuning</strong> improves the response to specific user commands, via supervised fine-tuning on instruction-output pairs. It improves the model’s ability to solve new tasks, tackle new domains or new tools (e.g. search engines and databases)</li>
+          <li><strong>Continual alignment</strong> ensures the outputs adhere to ethical standards, usually via RLHF. It tries to make models follow ethical guidelines and better reflect human preferences</li>
+        </ul>
+        <p>Shi et al. (2025) also distinguish two directions of continual learning. <strong>Vertical continual learning</strong> goes from general to specific: a general-purpose model is adapted step by step to a domain (e.g. medicine), and then to particular tasks within it, ideally without losing its general abilities. <strong>Horizontal continual learning</strong> keeps the same model up to date across time and domains, as new data arrives and the world changes. Each direction comes with its own kind of forgetting: in vertical CL, the model risks losing general knowledge as it specializes; in horizontal CL, it risks losing what it learned earlier as it adapts to new data.</p>
+
+        <h2>What are the challenges?</h2>
+        <p>The major challenge continual learning encounters is that of <strong>catastrophic forgetting</strong> (Luo et al., 2023): when the performance of a model on old tasks significantly diminishes when trained with new data.</p>
+        <p>There are some ways people have tried to mitigate it:</p>
+        <ol>
+          <li><strong>Experience replay methods:</strong> replaying examples from previous tasks during training to retain old knowledge
+            <ul>
+              <li>iCaRL (Rebuffi et al., 2017) is a classic example from image classification: it keeps a small memory of examples from previously seen classes and trains on them together with the new data, using knowledge distillation to stay close to the old model’s predictions.</li>
+              <li>LAMOL (Sun et al., 2020) replays without storing old data: the language model itself generates pseudo-examples of previous tasks and trains on them alongside the new task.</li>
+              <li>Scialom et al. (2022) show that fine-tuned LLMs can learn a sequence of new instruction tasks while keeping earlier ones, by rehearsing just 1% of previous training data.</li>
+              <li>InsCL (Wang et al., 2024) replays past instruction data during continual fine-tuning, choosing how much to replay from each task based on its similarity to the new one, and keeping the most informative instructions.</li>
+              <li>Abbes et al. (2025) revisit replay and gradient alignment for continual pretraining of LLMs on new languages, and find that the two reduce forgetting and are complementary.</li>
+            </ul>
+          </li>
+          <li><strong>Regularization-based methods:</strong> adding constraints or penalties to prevent the model from changing parameters that are important for previous tasks
+            <ul>
+              <li>EWC (Kirkpatrick et al., 2017) estimates how important each weight is for previous tasks and penalizes changes to the important ones.</li>
+              <li>Learning without Forgetting (Li and Hoiem, 2017) uses knowledge distillation to keep the model’s outputs close to those of the old model while it learns the new task.</li>
+            </ul>
+          </li>
+          <li><strong>Dynamic architecture methods:</strong> modifying the model architecture to accommodate new tasks while preserving previous knowledge
+            <ul>
+              <li>ELM (Jang et al., 2023) first trains a small expert adapter on top of the LLM for each task, then uses retrieval to choose the most relevant expert for every new task.</li>
+              <li>O-LoRA (Wang et al., 2023) learns each new task in its own low-rank (LoRA) subspace, orthogonal to the subspaces of previous tasks, so that new updates interfere less with old knowledge.</li>
+              <li>PlugLM (Cheng et al., 2023) stores domain knowledge explicitly in a differentiable plug-in memory, separate from the model’s parameters, so knowledge can be added or swapped without retraining the model.</li>
+            </ul>
+          </li>
+          <li><strong>Data selection:</strong> carefully selecting which new training examples to train on and which to replay
+            <ul>
+              <li>Adaptive Memory Replay (Smith et al., 2024) treats choosing which past data to replay as a multi-armed bandit problem, adaptively picking the data that best prevents forgetting at a small extra cost.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>Besides forgetting, there is a second, less discussed problem: <strong>loss of plasticity</strong>. Dohare et al. (2024) show that standard deep-learning methods gradually lose their ability to learn in continual-learning settings: after long sequences of tasks, networks trained with backpropagation learn new tasks no better than a shallow network. One symptom is that many units become “dormant”, meaning they almost never activate and stop contributing to learning (Sokar et al., 2023). To fix this, Dohare et al. (2024) propose continual backpropagation, a small change to standard gradient descent that keeps injecting randomness by reinitializing a small fraction of the least-used units, which keeps the network plastic. These results come mostly from image classification and reinforcement learning, so how much they apply to LLMs is still an open question. Other challenges that occur in continual learning include: how to do it computationally efficiently? how to keep models aligned with human values as they keep changing?</p>
+
+        <h2>So does it work?</h2>
+        <p>Works published in the last four years conclude that continual learning can work: LLMs can acquire new knowledge, domains, tasks and skills through sequential post-training and catastrophic forgetting can be mitigated (e.g. via replay, regularization). Whether continual learning is as good as joint training is not generally established.</p>
+        <p>Metrics have been introduced to measure effectiveness of continual learning (Lopez-Paz and Ranzato, 2017), for example Backward Transfer (BWT) assesses whether learning new tasks enhances or degrades performance on prior tasks and Forward Transfer (FWT) measures the generalization ability of the continual learning algorithms to unseen tasks.</p>
+        <p>Jang et al. (2022) claim that continual learning achieves comparable perplexity to training on the full updated data, at a fraction of the compute. Outside of LLMs, on image classification benchmarks, van de Ven et al. (2022) conclude that performance can come close to joint training in certain settings (e.g. the task-incremental setting, where the model is told which task it is solving) but not always: the domain-incremental setting is harder, and the class-incremental setting, where the model has to tell apart all classes seen so far, is the hardest, with replay usually needed to prevent catastrophic forgetting. Soutif-Cormerais et al. (2023) give a similar empirical comparison of methods in the online setting, where data arrives as a stream. Harrington et al. (2026) similarly show that different continual learning methods work and fail in different settings.</p>
+
+        <h2>Conclusion</h2>
+        <p>Continual learning tries to answer a simple question: how can a model keep learning from new data without having to start from scratch every time? For LLMs, this can happen at every stage of training, from pretraining to fine-tuning to alignment. The main obstacle is catastrophic forgetting, and replay, regularization, dynamic architectures and careful data selection all help mitigate it. So far, the evidence suggests that continual learning can work, and sometimes comes close to retraining on all the data, but how well it works depends a lot on the setting. Loss of plasticity is a reminder that keeping old knowledge is only half of the problem: a model also has to stay able to learn new things. Balancing the two, often called the stability–plasticity trade-off, is what continual learning is really about.</p>
+
+        <h3>Note</h3>
+        <p>This text was largely inspired and written after reading “Continual Learning for Large Language Models: A Survey” (Wu et al., 2024) and is meant as an introduction or broad overview of the topic.</p>
+
+        <h2>References</h2>
+        <ul class="references">
+          <li>Abbes, I., et al. (2025). Revisiting Replay and Gradient Alignment for Continual Pre-Training of Large Language Models. <em>Conference on Lifelong Learning Agents (CoLLAs)</em>.</li>
+          <li>Cheng, X., Lin, Y., Chen, X., Zhao, D., and Yan, R. (2023). Decouple Knowledge from Parameters for Plug-and-Play Language Modeling. <em>Findings of ACL</em>.</li>
+          <li>Dohare, S., Hernandez-Garcia, J. F., Lan, Q., Rahman, P., Mahmood, A. R., and Sutton, R. S. (2024). Loss of plasticity in deep continual learning. <em>Nature</em>.</li>
+          <li>Harrington, A., et al. (2026). When Does Continual Learning Require Learning. <em>arXiv:2607.07847</em>.</li>
+          <li>Jang, J., Ye, S., Lee, C., et al. (2022). TemporalWiki: A Lifelong Benchmark for Training and Evaluating Ever-Evolving Language Models. <em>EMNLP</em>.</li>
+          <li>Jang, J., Kim, S., Ye, S., et al. (2023). Exploring the Benefits of Training Expert Language Models over Instruction Tuning. <em>ICML</em>.</li>
+          <li>Kirkpatrick, J., et al. (2017). Overcoming catastrophic forgetting in neural networks. <em>PNAS</em>.</li>
+          <li>Li, Z., and Hoiem, D. (2017). Learning without Forgetting. <em>IEEE TPAMI</em>.</li>
+          <li>Lopez-Paz, D., and Ranzato, M. (2017). Gradient Episodic Memory for Continual Learning. <em>NeurIPS</em>.</li>
+          <li>Luo, Y., Yang, Z., Meng, F., Li, Y., Zhou, J., and Zhang, Y. (2023). An Empirical Study of Catastrophic Forgetting in Large Language Models During Continual Fine-tuning. <em>arXiv</em>.</li>
+          <li>Rebuffi, S.-A., Kolesnikov, A., Sperl, G., and Lampert, C. H. (2017). iCaRL: Incremental Classifier and Representation Learning. <em>CVPR</em>.</li>
+          <li>Scialom, T., Chakrabarty, T., and Muresan, S. (2022). Fine-tuned Language Models are Continual Learners. <em>EMNLP</em>.</li>
+          <li>Shi, H., Xu, Z., Wang, H., Qin, W., Wang, W., Wang, Y., Wang, Z., Ebrahimi, S., and Wang, H. (2025). Continual Learning of Large Language Models: A Comprehensive Survey. <em>ACM Computing Surveys</em>.</li>
+          <li>Smith, J. S., Valkov, L., Halbe, S., Gutta, V., Feris, R., Kira, Z., and Karlinsky, L. (2024). Adaptive Memory Replay for Continual Learning. <em>CVPR Workshops</em>.</li>
+          <li>Sokar, G., Agarwal, R., Castro, P. S., and Evci, U. (2023). The Dormant Neuron Phenomenon in Deep Reinforcement Learning. <em>ICML</em>.</li>
+          <li>Soutif-Cormerais, A., et al. (2023). A Comprehensive Empirical Evaluation on Online Continual Learning. <em>ICCV Workshops</em>.</li>
+          <li>Sun, F.-K., Ho, C.-H., and Lee, H.-Y. (2020). LAMOL: LAnguage MOdeling for Lifelong Language Learning. <em>ICLR</em>.</li>
+          <li>van de Ven, G. M., Tuytelaars, T., and Tolias, A. S. (2022). Three types of incremental learning. <em>Nature Machine Intelligence</em>.</li>
+          <li>Wang, X., et al. (2023). Orthogonal Subspace Learning for Language Model Continual Learning. <em>Findings of EMNLP</em>.</li>
+          <li>Wang, Y., et al. (2024). InsCL: A Data-efficient Continual Learning Paradigm for Fine-tuning Large Language Models with Instructions. <em>NAACL</em>.</li>
+          <li>Wu, T., Luo, L., Li, Y.-F., Pan, S., Vu, T.-T., and Haffari, G. (2024). Continual Learning for Large Language Models: A Survey. <em>arXiv</em>.</li>
+        </ul>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 Ioana Popescu</p>
+    </div>
+  </footer>
+  <script src="../blog/theme.js"></script>
+</body>
+</html>
