@@ -46,20 +46,17 @@
   <main id="main-content" tabindex="-1">
     <section id="main-research" class="page-section" aria-labelledby="heading-page-research">
       <h1 id="heading-page-research" class="section-heading page-title">Research &amp; Projects</h1>
-      <p class="page-intro">Machine learning theory, generative models for genomics, and probability. Click a figure to enlarge it.</p>
-
       <div class="filters" role="group" aria-label="Filter by topic">
         <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="chip" type="button" data-filter="ml" aria-pressed="false">Machine learning</button>
-        <button class="chip" type="button" data-filter="genomics" aria-pressed="false">Genomics</button>
+        <button class="chip" type="button" data-filter="ml-theory" aria-pressed="false">ML theory</button>
         <button class="chip" type="button" data-filter="llms" aria-pressed="false">LLMs</button>
-        <button class="chip" type="button" data-filter="math" aria-pressed="false">Mathematics</button>
+        <button class="chip" type="button" data-filter="genomics" aria-pressed="false">Genomics</button>
       </div>
 
       <div data-filter-group>
         <h2 class="subsection-heading">Research</h2>
         <ol class="card-list" role="list">
-          <li class="card media-card reveal" data-tags="ml math">
+          <li class="card media-card reveal" data-tags="ml-theory">
             <button class="thumb" type="button" data-lightbox="img/research/icml-risk.png" data-caption="Empirical and true risk for the local polynomial estimator, the transformer with hand-crafted weights, and the pretrained transformer." aria-label="Enlarge figure: empirical and true risk comparison">
               <img src="img/research/icml-risk.png" alt="" width="968" height="578" loading="lazy">
               <span class="thumb-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
@@ -68,7 +65,9 @@
               <h3 class="card-title">Efficient and Minimax Optimal In-context Nonparametric Regression with Transformers</h3>
               <p class="card-authors">Michelle Ching, <span class="me">Ioana Popescu</span>, Nico Smith · Supervised by Prof. Richard Samworth, Tianyi Ma, and Dr. William Underwood (University of Cambridge)</p>
               <div class="card-meta">
+                <span class="pill">Research Project</span>
                 <span class="pill">ICML 2026</span>
+                <span class="pill pill--muted">Jun 2025 – Aug 2025</span>
                 <a class="card-link" href="https://arxiv.org/abs/2601.15014v1" target="_blank" rel="noopener noreferrer">arXiv ↗</a>
               </div>
               <ul class="item-desc" role="list">
@@ -77,7 +76,7 @@
             </div>
           </li>
 
-          <li class="card media-card reveal" data-tags="ml genomics">
+          <li class="card media-card reveal" data-tags="genomics">
             <button class="thumb" type="button" data-lightbox="img/research/transcriptomics-slices.png" data-caption="Held-out MERFISH slice reconstruction: true slice (left), our method (Baryinterpol), SpatialZ, and DeepSpatial." aria-label="Enlarge figure: MERFISH slice reconstruction comparison">
               <img src="img/research/transcriptomics-slices.png" alt="" width="1024" height="275" loading="lazy">
               <span class="thumb-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
@@ -95,7 +94,7 @@
             </div>
           </li>
 
-          <li class="card media-card reveal" data-tags="math">
+          <li class="card media-card reveal" data-tags="">
             <button class="thumb" type="button" data-lightbox="img/research/pa-trees.png" data-caption="Preferential attachment trees: superlinear (left), with dominant hubs, versus sublinear (right), with a more uniform branching structure." aria-label="Enlarge figure: superlinear and sublinear preferential attachment trees">
               <img src="img/research/pa-trees.png" alt="" width="1024" height="436" loading="lazy">
               <span class="thumb-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
@@ -104,7 +103,8 @@
               <h3 class="card-title">Energy of Superlinear Preferential Attachment Trees</h3>
               <p class="card-authors"><span class="me">Ioana Popescu</span> · Supervised by Prof. Igor Kortchemski (ENS Ulm)</p>
               <div class="card-meta">
-                <span class="pill">Bachelor Thesis · 2025</span>
+                <span class="pill">Bachelor Thesis</span>
+                <span class="pill pill--muted">Jan 2025 – Mar 2025</span>
                 <a class="card-link" href="research_pdf/Bachelor_Thesis.pdf" target="_blank" rel="noopener noreferrer">PDF ↗</a>
                 <a class="card-link" href="https://fondation-hadamard.fr/en/articles/2025/08/27/maryam-mirzakhani-junior-prize-winners-2025" target="_blank" rel="noopener noreferrer">prize mention ↗</a>
               </div>
@@ -114,18 +114,6 @@
               </ul>
             </div>
           </li>
-
-          <li class="card media-card reveal" data-tags="math">
-            <div class="thumb thumb--glyph" aria-hidden="true">∫dU</div>
-            <div>
-              <h3 class="card-title">Weingarten Calculus</h3>
-              <p class="card-authors"><span class="me">Ioana Popescu</span> · Supervised by Prof. Guillaume Dubach (École Polytechnique)</p>
-              <div class="card-meta">
-                <span class="pill">Research Project · 2024</span>
-                <a class="card-link" href="research_pdf/Weingarten_Calculus.pdf" target="_blank" rel="noopener noreferrer">PDF ↗</a>
-              </div>
-              <ul class="item-desc" role="list">
-                <li>Surveyed Weingarten Calculus for undergraduates, covering random matrix theory, representation theory of compact groups, and algebraic combinatorics.</li>
               </ul>
             </div>
           </li>
@@ -135,21 +123,25 @@
       <div data-filter-group>
         <h2 class="subsection-heading">Selected Projects</h2>
         <ol class="card-list" role="list">
-          <li class="card media-card reveal" data-tags="ml llms">
-            <div class="thumb thumb--glyph" aria-hidden="true">&gt;_</div>
+          <li class="card media-card reveal" data-tags="llms">
+            <button class="thumb" type="button" data-lightbox="img/research/llm-harness.png" data-caption="Evaluation harness: exam questions are transcribed, given to the model with optional nudges, solved with access to Python and skills, self-checked, and then graded by a judge against the official solutions." aria-label="Enlarge figure: LLM evaluation harness diagram">
+              <img src="img/research/llm-harness.png" alt="" width="2000" height="1007" loading="lazy">
+              <span class="thumb-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+            </button>
             <div>
               <h3 class="card-title">Open LLM Benchmark on ETH Math Exams</h3>
               <div class="card-meta">
                 <span class="pill">Coding Project</span>
                 <span class="pill pill--muted">Sep 2026 – Dec 2026</span>
+                <a class="card-link" href="research_pdf/DMATH_Harness_Poster.pdf" target="_blank" rel="noopener noreferrer">poster PDF ↗</a>
               </div>
               <ul class="item-desc" role="list">
-                <li>Developing a benchmark to evaluate open-weight LLMs (Kimi, Gemma, GLM, Mistral-Small, Apertus) on ETH math exams from over 30 courses, investigating baseline performance and the impact of agentic components (tool use, self-check, skills, and multi-agent systems) in mitigating failure modes.</li>
+                <li>Developing a benchmark to evaluate open-weight LLMs (Kimi, Gemma, GLM, Mistral-Small, Apertus) on ETH math exams from over 30 courses, investigating baseline performance and the impact of agentic components (tool use, self-check, skills, and multi-agent systems).</li>
               </ul>
             </div>
           </li>
 
-          <li class="card media-card reveal" data-tags="ml">
+          <li class="card media-card reveal" data-tags="">
             <button class="thumb thumb--cover" type="button" data-lightbox="img/research/evolution-simulator.mp4" data-caption="Survival of the fittest in the simulator: an evolved carnivore catches a less adapted creature." aria-label="Play video: an evolved carnivore catches a less adapted creature">
               <video src="img/research/evolution-simulator.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
               <span class="thumb-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
@@ -162,8 +154,8 @@
                 <a class="card-link" href="https://github.com/EvolutionSimulator/EvolutionSimulator" target="_blank" rel="noopener noreferrer">code ↗</a>
               </div>
               <ul class="item-desc" role="list">
-                <li>Built a biological simulation in C++ where autonomous creatures with evolving bodies and brains compete for food and survival.</li>
-                <li>Used NEAT (NeuroEvolution of Augmenting Topologies) to evolve each creature's neural network under natural-selection pressure.</li>
+                <li>Built a biological simulation in C++ in which autonomous creatures compete for food and survival, and evolve through mutations in their neural-network brains under natural-selection pressure.</li>
+                <li>The brains evolve with NEAT (NeuroEvolution of Augmenting Topologies), inspired by The Bibites.</li>
               </ul>
             </div>
           </li>

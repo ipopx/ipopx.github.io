@@ -321,6 +321,7 @@ a.nav-name:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px
 
 /* ── Filter chips (Research) ───────────────────────────────────────────── */
 .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.page-title + .filters { margin-top: 1.25rem; }
 .chip {
   font: inherit; font-size: 0.82rem; font-weight: 500;
   padding: 0.3rem 0.85rem; border-radius: 99px; cursor: pointer;
