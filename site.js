@@ -119,4 +119,24 @@
   if (reduceMotion) {
     document.querySelectorAll('video[autoplay]').forEach(function (v) { v.pause(); v.removeAttribute('autoplay'); });
   }
+
+  // ── Blog citations: open the collapsed references and jump to the entry ──
+  var showRef = function (id) {
+    var ref = id && document.getElementById(id);
+    if (!ref) return;
+    var box = ref.closest('details');
+    if (box) box.open = true;
+    ref.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+    ref.classList.add('ref-flash');
+    setTimeout(function () { ref.classList.remove('ref-flash'); }, 1200);
+  };
+  document.querySelectorAll('a.cite').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var id = a.getAttribute('href').slice(1);
+      showRef(id);
+      try { history.replaceState(null, '', '#' + id); } catch (err) {}
+    });
+  });
+  if (location.hash.indexOf('#ref-') === 0) showRef(location.hash.slice(1));
 })();
