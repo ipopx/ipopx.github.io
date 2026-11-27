@@ -20,6 +20,10 @@
   </script>
   <link rel="stylesheet" href="../style.css?v=4">
   <link rel="stylesheet" href="../blog/blog.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.querySelector('.post-body'), {delimiters: [{left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -110,7 +114,7 @@
           </svg>
           <figcaption id="fig-parallel-cap">Like a person, a continually trained LLM learns new topics in sequence, adding new knowledge (highlighted) while keeping what it already knows.</figcaption>
         </figure>
-        <p>Unlike RAG, which adds knowledge at inference time without changing the model, or model editing, which targets individual facts, continual learning tries to improve model performance across tasks, across domains and across languages.</p>
+        <p>Unlike <span class="term" tabindex="0" aria-describedby="tip-rag">RAG<span class="term-tip" role="tooltip" id="tip-rag"><strong>Retrieval-augmented generation.</strong> At query time, fetch relevant documents and add them to the prompt, conditioning the generation on them.</span></span>, which adds knowledge at inference time without changing the model, or <span class="term" tabindex="0" aria-describedby="tip-editing">model editing<span class="term-tip" role="tooltip" id="tip-editing"><strong>Model editing.</strong> A small, targeted weight change \(\theta \to \theta + \Delta\theta\) that rewrites one fact (e.g. “The capital of France is: Barcelona” → “Paris”) and leaves unrelated outputs as they were.</span></span>, which targets individual facts, continual learning tries to improve model performance across tasks, across domains and across languages.</p>
 
         <h2>What does it entail?</h2>
         <p>Continual learning really asks: how can models learn from non-stationary data streams while continuously accumulating, updating, and exploiting knowledge over time?</p>
@@ -157,7 +161,7 @@
             <text class="d-label" x="428" y="149" text-anchor="middle">on instructions to learn</text>
             <text class="d-label" x="428" y="167" text-anchor="middle">new tasks, domains, tools</text>
 
-            <text class="d-label d-accent d-strong" x="601" y="128" text-anchor="middle">RLHF</text>
+            <text class="d-label d-accent d-strong" x="601" y="128" text-anchor="middle">reinforcement learning</text>
             <text class="d-label" x="601" y="149" text-anchor="middle">on human feedback to</text>
             <text class="d-label" x="601" y="167" text-anchor="middle">reflect values &amp; ethics</text>
           </svg>
@@ -167,7 +171,7 @@
         <p><a class="cite" href="#ref-shi2025">Shi et al. (2025)</a> also distinguish two directions of continual learning. <strong>Vertical continual learning</strong> goes from general to specific: a general-purpose model is adapted step by step to a domain (e.g. medicine), and then to particular tasks within it, ideally without losing its general abilities. <strong>Horizontal continual learning</strong> keeps the same model up to date across time and domains, as new data arrives and the world changes.</p>
 
         <h2>What are the challenges?</h2>
-        <p>The major challenge continual learning encounters is that of <strong>catastrophic forgetting</strong> (<a class="cite" href="#ref-luo2023">Luo et al., 2023</a>): when the performance of a model on old tasks significantly diminishes when trained with new data. For example, in vertical CL the model risks losing general knowledge as it specializes.</p>
+        <p>The major challenge continual learning encounters is that of <strong>catastrophic forgetting</strong> (<a class="cite" href="#ref-luo2023">Luo et al., 2023</a>): when the performance of a model on old tasks significantly diminishes when trained with new data. For example, in vertical continual learning the model risks losing general knowledge as it specializes.</p>
         <figure class="diagram" aria-labelledby="fig-forget-cap">
           <svg viewBox="0 0 680 270" role="img" aria-label="Chart of accuracy on task A while a model trains on tasks A, B and C in sequence. With naive fine-tuning, accuracy on A drops sharply once training on B starts: catastrophic forgetting. With replay, accuracy on A stays close to its peak.">
             <defs>
@@ -317,7 +321,7 @@
           </svg>
           <figcaption id="fig-transfer-cap">BWT looks back: does learning a new task help or hurt old ones? FWT looks ahead: does it help with tasks the model hasn't seen yet?</figcaption>
         </figure>
-        <p><a class="cite" href="#ref-jang2022">Jang et al. (2022)</a> claim that continual learning achieves comparable perplexity to training on the full updated data, at a fraction of the compute. <a class="cite" href="#ref-harrington2026">Harrington et al. (2026)</a> recast widely used LLM benchmarks as sequential problems and compare different continual learning methods, finding that each works in some settings and fails in others. Outside of LLMs, on image classification, <a class="cite" href="#ref-vandeven2022">van de Ven et al. (2022)</a> find that continual learning can come close to joint training in easier settings but struggles when the model has to tell apart all classes seen so far.</p>
+        <p><a class="cite" href="#ref-jang2022">Jang et al. (2022)</a> claim that continual learning achieves comparable <span class="term" tabindex="0" aria-describedby="tip-ppl">perplexity<span class="term-tip" role="tooltip" id="tip-ppl"><strong>Perplexity.</strong> How surprised the model is by held-out text: \[\mathrm{PPL} = \exp\Big(-\frac{1}{N}\sum_{i=1}^{N} \log p(x_i \mid x_{&lt;i})\Big)\]</span></span> to training on the full updated data, at a fraction of the compute. <a class="cite" href="#ref-harrington2026">Harrington et al. (2026)</a> recast widely used LLM benchmarks as sequential problems and compare different continual learning methods, finding that each works in some settings and fails in others. Outside of LLMs, on image classification, <a class="cite" href="#ref-vandeven2022">van de Ven et al. (2022)</a> find that continual learning can come close to joint training in easier settings but struggles when the model has to tell apart all classes seen so far.</p>
 
         <h2>Conclusion</h2>
         <p>Continual learning tries to answer a simple question: how can a model keep learning from new data without having to start from scratch every time? For LLMs, this can happen at every stage of training, from pretraining to fine-tuning to alignment. The main obstacle is catastrophic forgetting, and replay, regularization, dynamic architectures and careful data selection all help mitigate it. So far, the evidence suggests that continual learning can work, and sometimes comes close to retraining on all the data, but how well it works depends a lot on the setting. Loss of plasticity is a reminder that keeping old knowledge is only half of the problem: a model also has to stay able to learn new things. Balancing the two, often called the stability–plasticity trade-off, is what continual learning is really about.</p>
@@ -361,5 +365,20 @@
     </div>
   </footer>
   <script src="../site.js"></script>
+  <script>
+    // Nudge definition bubbles so they never run off the screen edge.
+    document.querySelectorAll('.term').forEach(function (t) {
+      function place() {
+        var tip = t.querySelector('.term-tip');
+        tip.style.setProperty('--shift', '0px');
+        var r = tip.getBoundingClientRect(), pad = 12, shift = 0;
+        if (r.left < pad) shift = pad - r.left;
+        else if (r.right > window.innerWidth - pad) shift = window.innerWidth - pad - r.right;
+        tip.style.setProperty('--shift', shift + 'px');
+      }
+      t.addEventListener('mouseenter', place);
+      t.addEventListener('focus', place);
+    });
+  </script>
 </body>
 </html>
